@@ -32,9 +32,7 @@ namespace DotNetFlix
 
         private void UploadMovie_Load(object sender, EventArgs e)
         {
-           // test();
-            //string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-            //pBoxCover.Image = new Bitmap(@paths +"\\Images\\" + "sss.jpg");
+           
             getGenres();
         }
 
@@ -47,6 +45,7 @@ namespace DotNetFlix
             listBoxGenres.DataSource = genresList;
             listBoxGenres.DisplayMember = "Genre1";
             listBoxGenres.ValueMember = "GenreID";
+            listBoxGenres.ClearSelected();
 
         }
 
@@ -129,19 +128,20 @@ namespace DotNetFlix
                 {
                     MessageBox.Show("Price Field is required");
                 }                
-                else if(!decimal.TryParse(txtPrice.Text, out d)) // If it's not a decimal, return false
+                else if(!decimal.TryParse(txtPrice.Text.Substring(1), out d)) // If it's not a decimal, return false
                 {
-                    MessageBox.Show("Invalid Price");
+                    MessageBox.Show("InvalidPrice");
                 }                
                 else
                 {
                     try
                     {
-                        string coverString = RemoveSpecialCharacters(txtTitle.Text.ToLower()) + DateTime.Now.ToString("ddMMyyyyhhmmssffff");
+                        string coverString = RemoveSpecialCharacters(txtTitle.Text.ToLower()) + DateTime.Now.ToString("ddMMyyyyhhmmssffff");                        
                         DotNetFlix.Models.Movy movie = new Movy()
                         {
                             Title = txtTitle.Text,
-                            Price = decimal.Parse(txtPrice.Text),
+                            IsNewRelease = checkBoxNewRelease.Checked,
+                            Price = decimal.Parse(txtPrice.Text.Substring(1)),
                             TrailerURL = txtTrailer.Text,
                             Synopsis = txtSynopsis.Text,
                             ImageString = coverString
@@ -183,6 +183,13 @@ namespace DotNetFlix
                                 if (count > 0)
                                 {
                                     MessageBox.Show(m.Title + " successfully added!");
+                                    txtTitle.Text = "";
+                                    txtPrice.Text = "$1.99";
+                                    txtSynopsis.Text = "";
+                                    txtTrailer.Text = "";
+                                    pBoxCover.Image = null;
+                                    checkBoxNewRelease.Checked = false;
+                                    listBoxGenres.ClearSelected();
                                 }
                                 else
                                 {
@@ -218,30 +225,6 @@ namespace DotNetFlix
 
             return m;           
         } 
-
-        public void test()
-        {
-            //string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-            
-            //using (MoviesContext db = new MoviesContext())
-            //{
-            //    var TestList = (from movie in db.Movies
-            //                    select movie).ToList();
-
-            //    foreach (Movy t in TestList)
-            //    {
-            //        PictureBox pb = new PictureBox();
-            //        pb.Image = new Bitmap(@paths + "\\Images\\" + t.ImageString + ".jpg");
-            //        pb.Size = new System.Drawing.Size(100, 148);
-            //        pb.SizeMode = PictureBoxSizeMode.StretchImage;
-            //        //Label lb = new Label();
-            //        //lb.Text = t.imgString;
-            //        flowLayoutPanel1.Controls.Add(pb);
-
-            //    }
-            //}               
-         
-        }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
@@ -289,6 +272,18 @@ namespace DotNetFlix
         private void AddMovieForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 
+        }
+
+        private void checkBoxNewRelease_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxNewRelease.Checked)
+            {
+                txtPrice.Text = 3.99.ToString("C2");
+            } 
+            else
+            {
+                txtPrice.Text = 1.99.ToString("C2");
+            }
         }
     }
 }

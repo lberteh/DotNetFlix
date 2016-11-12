@@ -42,7 +42,9 @@
             this.txtTrailer = new System.Windows.Forms.TextBox();
             this.lblTrailer = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.lblNewRelease = new System.Windows.Forms.Label();
+            this.checkBoxNewRelease = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxCover)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,17 +60,19 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(153, 29);
+            this.txtTitle.Location = new System.Drawing.Point(159, 29);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(182, 30);
+            this.txtTitle.Size = new System.Drawing.Size(432, 30);
             this.txtTitle.TabIndex = 1;
             // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(153, 80);
+            this.txtPrice.Location = new System.Drawing.Point(159, 80);
             this.txtPrice.Name = "txtPrice";
+            this.txtPrice.ReadOnly = true;
             this.txtPrice.Size = new System.Drawing.Size(182, 30);
             this.txtPrice.TabIndex = 3;
+            this.txtPrice.Text = "$1.99";
             // 
             // lblPrice
             // 
@@ -82,7 +86,7 @@
             // 
             // txtSynopsis
             // 
-            this.txtSynopsis.Location = new System.Drawing.Point(153, 456);
+            this.txtSynopsis.Location = new System.Drawing.Point(153, 501);
             this.txtSynopsis.Multiline = true;
             this.txtSynopsis.Name = "txtSynopsis";
             this.txtSynopsis.Size = new System.Drawing.Size(438, 114);
@@ -91,7 +95,7 @@
             // lblSynopsis
             // 
             this.lblSynopsis.AutoSize = true;
-            this.lblSynopsis.Location = new System.Drawing.Point(27, 456);
+            this.lblSynopsis.Location = new System.Drawing.Point(27, 501);
             this.lblSynopsis.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSynopsis.Name = "lblSynopsis";
             this.lblSynopsis.Size = new System.Drawing.Size(93, 22);
@@ -101,7 +105,7 @@
             // lblCover
             // 
             this.lblCover.AutoSize = true;
-            this.lblCover.Location = new System.Drawing.Point(27, 131);
+            this.lblCover.Location = new System.Drawing.Point(27, 176);
             this.lblCover.Name = "lblCover";
             this.lblCover.Size = new System.Drawing.Size(64, 22);
             this.lblCover.TabIndex = 6;
@@ -109,7 +113,7 @@
             // 
             // pBoxCover
             // 
-            this.pBoxCover.Location = new System.Drawing.Point(153, 131);
+            this.pBoxCover.Location = new System.Drawing.Point(159, 176);
             this.pBoxCover.Name = "pBoxCover";
             this.pBoxCover.Size = new System.Drawing.Size(182, 273);
             this.pBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -119,7 +123,7 @@
             // lblGenres
             // 
             this.lblGenres.AutoSize = true;
-            this.lblGenres.Location = new System.Drawing.Point(365, 32);
+            this.lblGenres.Location = new System.Drawing.Point(365, 83);
             this.lblGenres.Name = "lblGenres";
             this.lblGenres.Size = new System.Drawing.Size(146, 22);
             this.lblGenres.TabIndex = 8;
@@ -129,15 +133,15 @@
             // 
             this.listBoxGenres.FormattingEnabled = true;
             this.listBoxGenres.ItemHeight = 22;
-            this.listBoxGenres.Location = new System.Drawing.Point(369, 62);
+            this.listBoxGenres.Location = new System.Drawing.Point(369, 129);
             this.listBoxGenres.Name = "listBoxGenres";
             this.listBoxGenres.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxGenres.Size = new System.Drawing.Size(222, 378);
+            this.listBoxGenres.Size = new System.Drawing.Size(222, 356);
             this.listBoxGenres.TabIndex = 9;
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(234, 410);
+            this.btnBrowse.Location = new System.Drawing.Point(240, 455);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(101, 30);
             this.btnBrowse.TabIndex = 11;
@@ -147,7 +151,7 @@
             // 
             // txtTrailer
             // 
-            this.txtTrailer.Location = new System.Drawing.Point(153, 590);
+            this.txtTrailer.Location = new System.Drawing.Point(153, 635);
             this.txtTrailer.Name = "txtTrailer";
             this.txtTrailer.Size = new System.Drawing.Size(438, 30);
             this.txtTrailer.TabIndex = 13;
@@ -155,7 +159,7 @@
             // lblTrailer
             // 
             this.lblTrailer.AutoSize = true;
-            this.lblTrailer.Location = new System.Drawing.Point(27, 593);
+            this.lblTrailer.Location = new System.Drawing.Point(27, 638);
             this.lblTrailer.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblTrailer.Name = "lblTrailer";
             this.lblTrailer.Size = new System.Drawing.Size(112, 22);
@@ -164,7 +168,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(385, 640);
+            this.btnSave.Location = new System.Drawing.Point(385, 685);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(206, 53);
             this.btnSave.TabIndex = 14;
@@ -172,23 +176,47 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnBack
+            // btnLogout
             // 
-            this.btnBack.Location = new System.Drawing.Point(153, 640);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(85, 53);
-            this.btnBack.TabIndex = 15;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnLogout.Location = new System.Drawing.Point(153, 685);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(102, 53);
+            this.btnLogout.TabIndex = 15;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // lblNewRelease
+            // 
+            this.lblNewRelease.AutoSize = true;
+            this.lblNewRelease.Location = new System.Drawing.Point(27, 131);
+            this.lblNewRelease.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblNewRelease.Name = "lblNewRelease";
+            this.lblNewRelease.Size = new System.Drawing.Size(124, 22);
+            this.lblNewRelease.TabIndex = 16;
+            this.lblNewRelease.Text = "New Release";
+            // 
+            // checkBoxNewRelease
+            // 
+            this.checkBoxNewRelease.AutoSize = true;
+            this.checkBoxNewRelease.Font = new System.Drawing.Font("Lucida Sans", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxNewRelease.Location = new System.Drawing.Point(160, 133);
+            this.checkBoxNewRelease.MinimumSize = new System.Drawing.Size(20, 20);
+            this.checkBoxNewRelease.Name = "checkBoxNewRelease";
+            this.checkBoxNewRelease.Size = new System.Drawing.Size(20, 20);
+            this.checkBoxNewRelease.TabIndex = 17;
+            this.checkBoxNewRelease.UseVisualStyleBackColor = true;
+            this.checkBoxNewRelease.CheckedChanged += new System.EventHandler(this.checkBoxNewRelease_CheckedChanged);
             // 
             // AddMovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 717);
+            this.ClientSize = new System.Drawing.Size(625, 755);
             this.ControlBox = false;
-            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.checkBoxNewRelease);
+            this.Controls.Add(this.lblNewRelease);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtTrailer);
             this.Controls.Add(this.lblTrailer);
@@ -232,7 +260,9 @@
         private System.Windows.Forms.TextBox txtTrailer;
         private System.Windows.Forms.Label lblTrailer;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Label lblNewRelease;
+        private System.Windows.Forms.CheckBox checkBoxNewRelease;
     }
 }
 

@@ -29,5 +29,17 @@ namespace DotNetFlix
             // show next form
             addMovieForm.Show();
         }
+
+        private void btnCustomerLogin_Click(object sender, EventArgs e)
+        {
+            CustomerForm customerForm = new CustomerForm();
+            customerForm.previousForm = this;
+
+            // hide this form
+            this.Hide();
+
+            // show next form
+            customerForm.Show();
+        }
     }
 }

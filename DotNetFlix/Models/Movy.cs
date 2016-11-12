@@ -33,6 +33,8 @@ namespace DotNetFlix.Models
         [StringLength(255)]
         public string TrailerURL { get; set; }
 
+        public bool? IsNewRelease { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movie_Genres> Movie_Genres { get; set; }
     }

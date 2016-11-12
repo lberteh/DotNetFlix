@@ -13,11 +13,14 @@ namespace DotNetFlix
 {
     public partial class CustomerForm : Form
     {
+        public LoginForm previousForm;
+
         MoviesContext db = new MoviesContext();
         List<Movy> moviesList = new List<Movy>();
         public static Movy selectedMovie = new Movy();
         List<Genre> genres = new List<Genre>();
-        Genre allGenres = new Genre() { GenreID = 0, Genre1 = "All Genres" };
+        Genre allGenres = new Genre() { GenreID = 0, Genre1 = "ALL GENRES" };
+        Genre newReleases = new Genre() { GenreID = -1, Genre1 = "NEW RELEASES" };
         List<Genre> filteredGenres = new List<Genre>();
         BindingList<Movy> moviesBindingList = new BindingList<Movy>();
         private string _paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
@@ -44,6 +47,7 @@ namespace DotNetFlix
         private void CustomerForm_Load(object sender, EventArgs e)
         {            
             getGenresList();
+            filteredGenres.Insert(0, newReleases);
             filteredGenres.Insert(0, allGenres);
             fillCombobox();
             cBoxGenres.SelectedIndex = 0;
@@ -77,7 +81,13 @@ namespace DotNetFlix
 
         public void getMovies(int id)
         {
-            if(id == 0)
+            if (id == -1)
+            {
+                moviesList = (from movies in db.Movies
+                              where movies.IsNewRelease == true
+                              select movies).ToList();
+            }
+            else if (id == 0)
             {
                 moviesList = (from movies in db.Movies                              
                               select movies).ToList();
@@ -154,16 +164,39 @@ namespace DotNetFlix
 
         private void FormatSelectedMoviesList(object sender, ListControlConvertEventArgs e)
         {
-            string currentTitle = ((Movy)e.ListItem).Title.PadRight(25);
+            string currentTitle = ((Movy)e.ListItem).Title;
+            if (currentTitle.Length > 27)
+            {
+                currentTitle = currentTitle.Substring(0, 24) + "...";
+            }
+            string currentTitlePadded = currentTitle.PadRight(29);
             string currentPrice = ((Movy)e.ListItem).Price.ToString("C2");            
+            
 
-            e.Value = currentTitle + currentPrice;
+            e.Value = currentTitlePadded + currentPrice;
         }
 
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
-            moviesBindingList.Add(selectedMovie);
-            TotalCost = TotalCost + selectedMovie.Price;
+            int count = 0;
+            foreach(Movy m in moviesBindingList)
+            {
+                if(m.ID == selectedMovie.ID)
+                {
+                    count++;
+                }
+            }
+            if(count == 0)
+            {
+                moviesBindingList.Add(selectedMovie);
+                TotalCost = TotalCost + selectedMovie.Price;
+                btnCheckout.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show(selectedMovie.Title + " has already been added to the Cart!");
+            }
+            
         }
 
         private void btnWatchTrailer_Click(object sender, EventArgs e)
@@ -179,6 +212,10 @@ namespace DotNetFlix
             Movy movie = (Movy)lstSelectedMovies.SelectedItem;
             moviesBindingList.Remove(movie);
             TotalCost = TotalCost - movie.Price;
+            if (txtTotalCost.Text == "$0.00")
+            {
+                btnCheckout.Enabled = false;
+            }
         }
 
         private void FilterMoviesByGenre(object sender, EventArgs e)
@@ -190,6 +227,19 @@ namespace DotNetFlix
             moviesList.Clear();
             getMovies(key);
             fillMoviesPanel();
+        }
+
+        private void CloseForm(object sender, EventArgs e)
+        {
+            this.Close();
+            previousForm.Show();
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            string str = "Star Wars the Force Awakens";
+            string t = str + "   " + str.Length + "    " + str.Substring(0, 10);
+            MessageBox.Show(t);
         }
     }
 }

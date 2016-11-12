@@ -46,6 +46,8 @@
             this.txtTotalCost = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnCheckout = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -58,7 +60,7 @@
             this.cBoxGenres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cBoxGenres.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxGenres.FormattingEnabled = true;
-            this.cBoxGenres.Location = new System.Drawing.Point(13, 13);
+            this.cBoxGenres.Location = new System.Drawing.Point(34, 28);
             this.cBoxGenres.MaxDropDownItems = 20;
             this.cBoxGenres.Name = "cBoxGenres";
             this.cBoxGenres.Size = new System.Drawing.Size(212, 26);
@@ -68,9 +70,9 @@
             // flpMovies
             // 
             this.flpMovies.AutoScroll = true;
-            this.flpMovies.Location = new System.Drawing.Point(13, 49);
+            this.flpMovies.Location = new System.Drawing.Point(34, 64);
             this.flpMovies.Name = "flpMovies";
-            this.flpMovies.Size = new System.Drawing.Size(726, 114);
+            this.flpMovies.Size = new System.Drawing.Size(833, 388);
             this.flpMovies.TabIndex = 1;
             // 
             // lblTitleLabel
@@ -96,7 +98,7 @@
             this.panel1.Controls.Add(this.lblTitleLabel);
             this.panel1.Location = new System.Drawing.Point(6, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(714, 169);
+            this.panel1.Size = new System.Drawing.Size(799, 169);
             this.panel1.TabIndex = 3;
             // 
             // lblGenre
@@ -141,7 +143,7 @@
             // 
             this.lblPriceLabel.AutoSize = true;
             this.lblPriceLabel.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPriceLabel.Location = new System.Drawing.Point(603, 6);
+            this.lblPriceLabel.Location = new System.Drawing.Point(688, 6);
             this.lblPriceLabel.Name = "lblPriceLabel";
             this.lblPriceLabel.Size = new System.Drawing.Size(50, 18);
             this.lblPriceLabel.TabIndex = 7;
@@ -150,7 +152,7 @@
             // btnWatchTrailer
             // 
             this.btnWatchTrailer.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWatchTrailer.Location = new System.Drawing.Point(606, 49);
+            this.btnWatchTrailer.Location = new System.Drawing.Point(691, 49);
             this.btnWatchTrailer.Name = "btnWatchTrailer";
             this.btnWatchTrailer.Size = new System.Drawing.Size(108, 54);
             this.btnWatchTrailer.TabIndex = 6;
@@ -161,7 +163,7 @@
             // btnAddToCart
             // 
             this.btnAddToCart.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddToCart.Location = new System.Drawing.Point(606, 132);
+            this.btnAddToCart.Location = new System.Drawing.Point(691, 132);
             this.btnAddToCart.Name = "btnAddToCart";
             this.btnAddToCart.Size = new System.Drawing.Size(108, 37);
             this.btnAddToCart.TabIndex = 5;
@@ -173,7 +175,7 @@
             // 
             this.lblPrice.AutoSize = true;
             this.lblPrice.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrice.Location = new System.Drawing.Point(659, 6);
+            this.lblPrice.Location = new System.Drawing.Point(744, 6);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(52, 18);
             this.lblPrice.TabIndex = 4;
@@ -194,7 +196,7 @@
             this.lstSelectedMovies.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstSelectedMovies.FormattingEnabled = true;
             this.lstSelectedMovies.ItemHeight = 16;
-            this.lstSelectedMovies.Location = new System.Drawing.Point(746, 49);
+            this.lstSelectedMovies.Location = new System.Drawing.Point(873, 64);
             this.lstSelectedMovies.Name = "lstSelectedMovies";
             this.lstSelectedMovies.Size = new System.Drawing.Size(284, 388);
             this.lstSelectedMovies.TabIndex = 4;
@@ -204,9 +206,9 @@
             // 
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 444);
+            this.groupBox1.Location = new System.Drawing.Point(34, 459);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(726, 195);
+            this.groupBox1.Size = new System.Drawing.Size(811, 195);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Movie Details";
@@ -214,16 +216,17 @@
             // txtTotalCost
             // 
             this.txtTotalCost.Font = new System.Drawing.Font("Lucida Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalCost.Location = new System.Drawing.Point(878, 457);
+            this.txtTotalCost.Location = new System.Drawing.Point(1005, 472);
             this.txtTotalCost.Name = "txtTotalCost";
             this.txtTotalCost.Size = new System.Drawing.Size(152, 36);
             this.txtTotalCost.TabIndex = 6;
+            this.txtTotalCost.Text = "$0.00";
             this.txtTotalCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(878, 510);
+            this.button1.Location = new System.Drawing.Point(1005, 534);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 48);
             this.button1.TabIndex = 11;
@@ -235,18 +238,43 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Lucida Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(745, 460);
+            this.lblTotal.Location = new System.Drawing.Point(872, 475);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(99, 27);
             this.lblTotal.TabIndex = 11;
             this.lblTotal.Text = "TOTAL:";
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(1098, 25);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(59, 29);
+            this.btnLogout.TabIndex = 16;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.CloseForm);
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.Enabled = false;
+            this.btnCheckout.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckout.Location = new System.Drawing.Point(873, 606);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(284, 48);
+            this.btnCheckout.TabIndex = 17;
+            this.btnCheckout.Text = "Proceed to Checkout";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1042, 678);
+            this.ClientSize = new System.Drawing.Size(1189, 684);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnCheckout);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtTotalCost);
@@ -254,7 +282,9 @@
             this.Controls.Add(this.lstSelectedMovies);
             this.Controls.Add(this.flpMovies);
             this.Controls.Add(this.cBoxGenres);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CustomerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = ".NETFlix";
             this.Load += new System.EventHandler(this.CustomerForm_Load);
             this.panel1.ResumeLayout(false);
@@ -287,5 +317,7 @@
         private System.Windows.Forms.TextBox txtTotalCost;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnCheckout;
     }
 }
