@@ -58,19 +58,19 @@
             this.cBoxGenres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cBoxGenres.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxGenres.FormattingEnabled = true;
-            this.cBoxGenres.Items.AddRange(new object[] {
-            "All Genres"});
             this.cBoxGenres.Location = new System.Drawing.Point(13, 13);
             this.cBoxGenres.MaxDropDownItems = 20;
             this.cBoxGenres.Name = "cBoxGenres";
             this.cBoxGenres.Size = new System.Drawing.Size(212, 26);
             this.cBoxGenres.TabIndex = 0;
+            this.cBoxGenres.SelectedIndexChanged += new System.EventHandler(this.FilterMoviesByGenre);
             // 
             // flpMovies
             // 
+            this.flpMovies.AutoScroll = true;
             this.flpMovies.Location = new System.Drawing.Point(13, 49);
             this.flpMovies.Name = "flpMovies";
-            this.flpMovies.Size = new System.Drawing.Size(726, 388);
+            this.flpMovies.Size = new System.Drawing.Size(726, 114);
             this.flpMovies.TabIndex = 1;
             // 
             // lblTitleLabel
