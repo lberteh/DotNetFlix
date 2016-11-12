@@ -15,6 +15,19 @@ namespace DotNetFlix
         public LoginForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+
+        private void btnAdminLogin_Click(object sender, EventArgs e)
+        {
+            AddMovieForm addMovieForm = new AddMovieForm();
+            addMovieForm.previousForm = this;
+
+            // hide this form
+            this.Hide();
+
+            // show next form
+            addMovieForm.Show();
         }
     }
 }

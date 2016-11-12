@@ -1,6 +1,6 @@
 ﻿namespace DotNetFlix
 {
-    partial class UploadMovie
+    partial class AddMovieForm
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             this.txtTrailer = new System.Windows.Forms.TextBox();
             this.lblTrailer = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxCover)).BeginInit();
             this.SuspendLayout();
             // 
@@ -164,30 +164,31 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(416, 642);
+            this.btnSave.Location = new System.Drawing.Point(385, 640);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(175, 53);
+            this.btnSave.Size = new System.Drawing.Size(206, 53);
             this.btnSave.TabIndex = 14;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button1
+            // btnBack
             // 
-            this.button1.Location = new System.Drawing.Point(19, 202);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 148);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.btnBack.Location = new System.Drawing.Point(153, 640);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(85, 53);
+            this.btnBack.TabIndex = 15;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // UploadMovie
+            // AddMovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 717);
-            this.Controls.Add(this.button1);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtTrailer);
             this.Controls.Add(this.lblTrailer);
@@ -204,8 +205,10 @@
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Lucida Sans", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.Name = "UploadMovie";
+            this.Name = "AddMovieForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Movie";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddMovieForm_FormClosing);
             this.Load += new System.EventHandler(this.UploadMovie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxCover)).EndInit();
             this.ResumeLayout(false);
@@ -229,7 +232,7 @@
         private System.Windows.Forms.TextBox txtTrailer;
         private System.Windows.Forms.Label lblTrailer;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBack;
     }
 }
 

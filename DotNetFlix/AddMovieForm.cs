@@ -12,17 +12,22 @@ using DotNetFlix.Models;
 
 namespace DotNetFlix
 {
-    public partial class UploadMovie : Form
+    public partial class AddMovieForm : Form
     {
+        public LoginForm previousForm;
+
         // create an instance of my database
         MoviesContext db = new MoviesContext();
         OpenFileDialog open = new OpenFileDialog();
         private string _paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
         List<Genre> genresList;
 
-        public UploadMovie()
+        public AddMovieForm()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            
         }
 
         private void UploadMovie_Load(object sender, EventArgs e)
@@ -268,6 +273,22 @@ namespace DotNetFlix
             //    // txtSynopsis.Text = txtSynopsis.Text + item.Genre1 + " ID = " + item.GenreID + ", ";
             //}
 
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            closeForm();
+        }
+
+        public void closeForm()
+        {
+            this.Close();
+            previousForm.Show();
+        }
+
+        private void AddMovieForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // 
         }
     }
 }
