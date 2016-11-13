@@ -80,8 +80,20 @@
     <Compile Include="Models\Movie_Genres.cs" />
     <Compile Include="Models\Movy.cs" />
     <Compile Include="Models\test.cs" />
+    <Compile Include="OrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderForm.Designer.cs">
+      <DependentUpon>OrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StreamForm.Designer.cs">
+      <DependentUpon>StreamForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrailerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +109,9 @@
     <EmbeddedResource Include="AddMovieForm.resx">
       <DependentUpon>AddMovieForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrderForm.resx">
+      <DependentUpon>OrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -106,6 +121,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StreamForm.resx">
+      <DependentUpon>StreamForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrailerForm.resx">
       <DependentUpon>TrailerForm.cs</DependentUpon>
     </EmbeddedResource>

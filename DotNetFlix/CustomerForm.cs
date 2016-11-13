@@ -22,7 +22,7 @@ namespace DotNetFlix
         Genre allGenres = new Genre() { GenreID = 0, Genre1 = "ALL GENRES" };
         Genre newReleases = new Genre() { GenreID = -1, Genre1 = "NEW RELEASES" };
         List<Genre> filteredGenres = new List<Genre>();
-        BindingList<Movy> moviesBindingList = new BindingList<Movy>();
+        
         private string _paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
         private decimal totalCost;
 
@@ -39,7 +39,7 @@ namespace DotNetFlix
         public CustomerForm()
         {
             InitializeComponent();
-            lstSelectedMovies.DataSource = moviesBindingList;
+            lstSelectedMovies.DataSource = Program.moviesBindingList;
             lstSelectedMovies.DisplayMember = "Title";
             lstSelectedMovies.ValueMember = "ID";
         }
@@ -179,7 +179,7 @@ namespace DotNetFlix
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
             int count = 0;
-            foreach(Movy m in moviesBindingList)
+            foreach(Movy m in Program.moviesBindingList)
             {
                 if(m.ID == selectedMovie.ID)
                 {
@@ -188,7 +188,7 @@ namespace DotNetFlix
             }
             if(count == 0)
             {
-                moviesBindingList.Add(selectedMovie);
+                Program.moviesBindingList.Add(selectedMovie);
                 TotalCost = TotalCost + selectedMovie.Price;
                 btnCheckout.Enabled = true;
             }
@@ -210,7 +210,7 @@ namespace DotNetFlix
         private void RemoveMovie(object sender, EventArgs e)
         {
             Movy movie = (Movy)lstSelectedMovies.SelectedItem;
-            moviesBindingList.Remove(movie);
+            Program.moviesBindingList.Remove(movie);
             TotalCost = TotalCost - movie.Price;
             if (txtTotalCost.Text == "$0.00")
             {
@@ -231,15 +231,21 @@ namespace DotNetFlix
 
         private void CloseForm(object sender, EventArgs e)
         {
+            Program.moviesBindingList.Clear();
             this.Close();
             previousForm.Show();
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            string str = "Star Wars the Force Awakens";
-            string t = str + "   " + str.Length + "    " + str.Substring(0, 10);
-            MessageBox.Show(t);
+            OrderForm orderForm = new OrderForm();
+            orderForm.previousForm = this;
+
+            // hide this form
+            this.Hide();
+
+            // show next form
+            orderForm.Show();
         }
     }
 }
