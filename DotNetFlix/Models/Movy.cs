@@ -1,3 +1,11 @@
+/*
+ * App: DotNETFlix 
+ * Author: Lucas Berté Schoenardie
+ * Student #: 200322197
+ * App Creation Date: 11/01/2016
+ * App Description: Online movie rental/purchase application
+ */
+
 namespace DotNetFlix.Models
 {
     using System;

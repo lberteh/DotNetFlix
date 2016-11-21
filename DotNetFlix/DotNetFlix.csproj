@@ -79,7 +79,6 @@
     <Compile Include="Models\MoviesContext.cs" />
     <Compile Include="Models\Movie_Genres.cs" />
     <Compile Include="Models\Movy.cs" />
-    <Compile Include="Models\test.cs" />
     <Compile Include="OrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,7 +141,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Content Include="Images\backtothefuture171120160642183934.jpg" />
+    <Content Include="Images\deadpoetssociety121120160522361348.jpg" />
+    <Content Include="Images\deadpool121120160457474816.jpg" />
+    <Content Include="Images\guradiansofthegalaxy121120160316486770.jpg" />
+    <Content Include="Images\lesmisrables121120160349048823.jpg" />
+    <Content Include="Images\oceanseleven101120160249397466.jpg" />
+    <Content Include="Images\raidersofthelostark171120160714377287.jpg" />
+    <Content Include="Images\sausageparty111120160147505789.jpg" />
+    <Content Include="Images\sherlockholmes111120160223115104.jpg" />
+    <Content Include="Images\sherlockholmes111120160234399734.jpg" />
+    <Content Include="Images\starwarsepisodeviitheforceawakens121120160309523013.jpg" />
+    <Content Include="Images\theboondocksaints131120161226517412.jpg" />
+    <Content Include="Images\thegodfather101120160200306001.jpg" />
+    <Content Include="Images\thesilenceofthelambs121120160649418506.jpg" />
+    <Content Include="Images\warcraft121120160500208284.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

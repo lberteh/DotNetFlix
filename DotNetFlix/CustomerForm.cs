@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * App: DotNETFlix 
+ * Author: Lucas Berté Schoenardie
+ * Student #: 200322197
+ * App Creation Date: 11/01/2016
+ * App Description: Online movie rental/purchase application
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,19 +21,19 @@ namespace DotNetFlix
 {
     public partial class CustomerForm : Form
     {
-        public LoginForm previousForm;
-
-        MoviesContext db = new MoviesContext();
-        List<Movy> moviesList = new List<Movy>();
-        public static Movy selectedMovie = new Movy();
-        List<Genre> genres = new List<Genre>();
-        Genre allGenres = new Genre() { GenreID = 0, Genre1 = "ALL GENRES" };
+        public LoginForm previousForm; // references previous form
+        MoviesContext db = new MoviesContext(); // instantiate my db context
+        List<Movy> moviesList = new List<Movy>(); // instantiate a movies List 
+        public static Movy selectedMovie = new Movy(); // holds the movie selected by the user
+        List<Genre> genres = new List<Genre>(); // instantiate a list of genres
+        // instantiate new genres properties to use in dropdown filter 
+        Genre allGenres = new Genre() { GenreID = 0, Genre1 = "ALL GENRES" }; 
         Genre newReleases = new Genre() { GenreID = -1, Genre1 = "NEW RELEASES" };
-        List<Genre> filteredGenres = new List<Genre>();
-        
-        private string _paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-        private decimal totalCost;
+        List<Genre> filteredGenres = new List<Genre>(); // holds the genres for selected movie      
+        private string _paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10)); // application path
+        private decimal totalCost; // total cost of selected movies
 
+        // total cost property
         public decimal TotalCost
         {
             get { return totalCost; }
@@ -51,13 +59,11 @@ namespace DotNetFlix
             filteredGenres.Insert(0, allGenres);
             fillCombobox();
             cBoxGenres.SelectedIndex = 0;
-            //cBoxGenres.DataSource = filteredGenres;
-            //cBoxGenres.DisplayMember = "Genre1";
-            //cBoxGenres.ValueMember = "GenreID";
             getMovies(0);
             fillMoviesPanel();
         }
 
+        // fill combobox with genres from movies that are in db
         private void fillCombobox()
         {
             // Bind combobox to dictionary
@@ -71,6 +77,7 @@ namespace DotNetFlix
             cBoxGenres.ValueMember = "Key";
         }
 
+        // gets all genres within existing movies in db, no repeat
         private void getGenresList()
         {
             filteredGenres = (from m_g in db.Movie_Genres
@@ -79,6 +86,7 @@ namespace DotNetFlix
             
         }
 
+        // displays movies according to selected genre 
         public void getMovies(int id)
         {
             if (id == -1)
@@ -102,6 +110,7 @@ namespace DotNetFlix
             
         }
 
+        // fills the panel with filtered movies from getMovies(int id);
         public void fillMoviesPanel()
         {
             flpMovies.Controls.Clear();
@@ -120,6 +129,7 @@ namespace DotNetFlix
             }
         }
 
+        // picture box goes back to regular size when mouse leaves
         private void Mouse_Leave(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -129,12 +139,14 @@ namespace DotNetFlix
             //}            
         }
 
+        // makes movie cover big when mouse enters the picture box
         private void Mouse_Enter(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
             pb.Size = new System.Drawing.Size(147, 218);
         }
 
+        // selects movie and displays movie info
         private void Movie_Click(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -145,6 +157,7 @@ namespace DotNetFlix
             lblPrice.Text = selectedMovie.Price.ToString("C2");
         }
 
+        // gets all genres from clicked movie
         private string getGenres()
         {
             genres = (from g in db.Genres
@@ -162,6 +175,7 @@ namespace DotNetFlix
             return genresString.Remove(genresString.Length - 2); 
         }
 
+        // formats string to display movie title and price in the selected movies listbox
         private void FormatSelectedMoviesList(object sender, ListControlConvertEventArgs e)
         {
             string currentTitle = ((Movy)e.ListItem).Title;
@@ -176,6 +190,7 @@ namespace DotNetFlix
             e.Value = currentTitlePadded + currentPrice;
         }
 
+        // adds movie to cart
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
             int count = 0;
@@ -199,6 +214,7 @@ namespace DotNetFlix
             
         }
 
+        // opens a form with youtube movie trailer
         private void btnWatchTrailer_Click(object sender, EventArgs e)
         {
             TrailerForm trailerForm = new TrailerForm();         
@@ -207,6 +223,7 @@ namespace DotNetFlix
             trailerForm.Show();
         }
 
+        // removes selected movie from cart
         private void RemoveMovie(object sender, EventArgs e)
         {
             Movy movie = (Movy)lstSelectedMovies.SelectedItem;
@@ -218,6 +235,7 @@ namespace DotNetFlix
             }
         }
 
+        // filter movies to be displayed by the selected genre in the combobox
         private void FilterMoviesByGenre(object sender, EventArgs e)
         {
             ComboBox cb = (ComboBox)sender;
@@ -229,13 +247,16 @@ namespace DotNetFlix
             fillMoviesPanel();
         }
 
+        // closes and goes back to previous form
         private void CloseForm(object sender, EventArgs e)
         {
             Program.moviesBindingList.Clear();
+            LoginForm loginForm = new LoginForm();
             this.Close();
-            previousForm.Show();
+            loginForm.Show();
         }
 
+        // hides form and goes to next form
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             OrderForm orderForm = new OrderForm();

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * App: DotNETFlix 
+ * Author: Lucas Berté Schoenardie
+ * Student #: 200322197
+ * App Creation Date: 11/01/2016
+ * App Description: Online movie rental/purchase application
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +26,7 @@ namespace DotNetFlix
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
+        // goes to add movie form
         private void btnAdminLogin_Click(object sender, EventArgs e)
         {
             AddMovieForm addMovieForm = new AddMovieForm();
@@ -30,6 +39,7 @@ namespace DotNetFlix
             addMovieForm.Show();
         }
 
+        // goes to customer form
         private void btnCustomerLogin_Click(object sender, EventArgs e)
         {
             CustomerForm customerForm = new CustomerForm();
@@ -41,5 +51,6 @@ namespace DotNetFlix
             // show next form
             customerForm.Show();
         }
+     
     }
 }

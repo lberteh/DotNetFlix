@@ -1,3 +1,11 @@
+/*
+ * App: DotNETFlix 
+ * Author: Lucas Berté Schoenardie
+ * Student #: 200322197
+ * App Creation Date: 11/01/2016
+ * App Description: Online movie rental/purchase application
+ */
+
 namespace DotNetFlix.Models
 {
     using System;
@@ -15,7 +23,7 @@ namespace DotNetFlix.Models
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Movie_Genres> Movie_Genres { get; set; }
         public virtual DbSet<Movy> Movies { get; set; }
-        public virtual DbSet<test> tests { get; set; }
+       
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * App: DotNETFlix 
+ * Author: Lucas Berté Schoenardie
+ * Student #: 200322197
+ * App Creation Date: 11/01/2016
+ * App Description: Online movie rental/purchase application
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +32,7 @@ namespace DotNetFlix
             fillPanel();
         }
 
+        // fills panel with all pertinent info regarding the purchase, including total cost and selected movies
         private void fillPanel()
         {
             foreach (Movy movie in Program.moviesBindingList)
@@ -37,6 +46,7 @@ namespace DotNetFlix
             }
         }
 
+        // exists app
         private void btnOK_Click(object sender, EventArgs e)
         {
             Application.Exit();

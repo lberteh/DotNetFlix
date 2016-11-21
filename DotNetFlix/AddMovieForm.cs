@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * App: DotNETFlix 
+ * Author: Lucas Berté Schoenardie
+ * Student #: 200322197
+ * App Creation Date: 11/01/2016
+ * App Description: Online movie rental/purchase application
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,11 +22,13 @@ namespace DotNetFlix
 {
     public partial class AddMovieForm : Form
     {
-        public LoginForm previousForm;
+        public LoginForm previousForm; // reference to previous form 
 
-        // create an instance of my database
+        // objects
         MoviesContext db = new MoviesContext();
         OpenFileDialog open = new OpenFileDialog();
+
+        // path used to upload and get images
         private string _paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
         List<Genre> genresList;
 
@@ -31,14 +41,13 @@ namespace DotNetFlix
         }
 
         private void UploadMovie_Load(object sender, EventArgs e)
-        {
-           
+        {           
             getGenres();
         }
 
+        // gets a list of movie genres from the db
         public void getGenres()
-        {                   
-
+        {                 
             genresList = (from genre in db.Genres
                              select genre).ToList();
 
@@ -49,23 +58,7 @@ namespace DotNetFlix
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {          
-            
-            open.Filter = "Image Files (*.jpg)|*.jpg|All Files(*.*)|*.*";
-            open.FilterIndex = 1;
-
-            if(open.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if(open.CheckFileExists)
-                {
-                    string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-                    string imageName = System.IO.Path.GetFileName(open.FileName.Remove(open.FileName.Length - 3));
-                    System.IO.File.Copy(open.FileName, paths + "\\Images\\" + RemoveSpecialCharacters(imageName.ToLower()) + DateTime.Now.ToString("ddMMyyyyhhmmssffff") + ".jpg");
-                    MessageBox.Show("Successfully Uploaded");
-                }
-            }
-        }
+        // removes special characters and spaces (used to name the image before uploading)
         public static string RemoveSpecialCharacters(string input)
         {
             Regex regex = new Regex("[^a-zA-Z0-9]");
@@ -73,7 +66,7 @@ namespace DotNetFlix
         }
 
 
-
+        // browse for a jpg image and displays selected image in picture box
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             
@@ -99,26 +92,12 @@ namespace DotNetFlix
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            using (MoviesContext db = new MoviesContext())
-            {
-                DotNetFlix.Models.test t = new test()
-                {
-                    name = txtTitle.Text
-                };
-
-                db.tests.Add(t);
-                db.SaveChanges();
-
-            }
-            
-        }
-
+        // saves movie to database
         private void btnSave_Click(object sender, EventArgs e)
         {
             using (MoviesContext db = new MoviesContext())
             {
+                // I did not add validation for every field... 
                 decimal d;
                 if (string.IsNullOrWhiteSpace(txtTitle.Text)) 
                 {
@@ -136,8 +115,9 @@ namespace DotNetFlix
                 {
                     try
                     {
+                        // sets the name of the image file using movie title without special characters and spaces + timestamp
                         string coverString = RemoveSpecialCharacters(txtTitle.Text.ToLower()) + DateTime.Now.ToString("ddMMyyyyhhmmssffff");                        
-                        DotNetFlix.Models.Movy movie = new Movy()
+                        DotNetFlix.Models.Movy movie = new Movy() // creates a new movie object 
                         {
                             Title = txtTitle.Text,
                             IsNewRelease = checkBoxNewRelease.Checked,
@@ -146,12 +126,12 @@ namespace DotNetFlix
                             Synopsis = txtSynopsis.Text,
                             ImageString = coverString
                         };
-
+                        // save movie to db and upload image to images folder
                         pBoxCover.Image.Save(_paths + "\\Images\\" + coverString + ".jpg");
                         db.Movies.Add(movie);
-                        db.SaveChanges();
+                        db.SaveChanges(); 
 
-                        Movy m = getInsertedMovie(coverString);
+                        Movy m = getInsertedMovie(coverString); // gets movie that was just saved to db using the imageName as filter
 
                         if (m.ImageString == coverString)
                         {
@@ -174,13 +154,13 @@ namespace DotNetFlix
                                     db.Movie_Genres.Add(movie_genre);
                                 }
 
-                                db.SaveChanges();
+                                db.SaveChanges(); // saves movie genres to movie_genres table 
 
                                 var count = (from m_g in db.Movie_Genres
                                              where m_g.MovieID == m.ID
                                              select m_g).Count();
 
-                                if (count > 0)
+                                if (count > 0) // if count is greater than 0, it means it worked, so clear form and display success message
                                 {
                                     MessageBox.Show(m.Title + " successfully added!");
                                     txtTitle.Text = "";
@@ -217,6 +197,7 @@ namespace DotNetFlix
             }
         }
 
+        // returns the movie that was just inserted in the database 
         private Movy getInsertedMovie(string imageString)
         {           
             Movy m = (from movie in db.Movies
@@ -226,54 +207,14 @@ namespace DotNetFlix
             return m;           
         } 
 
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            txtSynopsis.Text = "";
-
-            foreach (int i in listBoxGenres.SelectedIndices)
-            {
-                var item = (from genre in db.Genres
-                            where genre.GenreID == (i + 1)
-                            select genre).FirstOrDefault();
-
-                Movy m = (from movie in db.Movies
-                          where movie.ImageString == "thegodfather101120160200306001"
-                          select movie).FirstOrDefault();
-
-                txtSynopsis.Text = m.Title;
-
-            }
-
-
-
-            // var itemList = listBoxGenres.SelectedItems;
-
-
-
-            //foreach (var item in listBoxGenres.SelectedItems)
-            //{
-            //    MessageBox.Show(item.ToString());
-            //    // txtSynopsis.Text = txtSynopsis.Text + item.Genre1 + " ID = " + item.GenreID + ", ";
-            //}
-
-        }
-
+        // closes and returns to previous form
         private void btnBack_Click(object sender, EventArgs e)
-        {
-            closeForm();
-        }
-
-        public void closeForm()
-        {
+        {           
             this.Close();
             previousForm.Show();
         }
 
-        private void AddMovieForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // 
-        }
-
+        // adds $2.00 to price if New Release checkBox is checked
         private void checkBoxNewRelease_CheckedChanged(object sender, EventArgs e)
         {
             if(checkBoxNewRelease.Checked)

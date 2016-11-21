@@ -236,7 +236,6 @@
             this.Name = "AddMovieForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Movie";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddMovieForm_FormClosing);
             this.Load += new System.EventHandler(this.UploadMovie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxCover)).EndInit();
             this.ResumeLayout(false);
